@@ -28,7 +28,6 @@ const stories = [
 ];
 
 export default function storiesReducer(state = initialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case LOADSTORIES:
       return { items: stories.slice() };

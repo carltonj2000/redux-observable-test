@@ -1,32 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { loadStories, clearStories } from "../actions";
+import * as actions from "../actions";
 
 export const StoryList = ({ items }) => (
   <ul>
-    {console.log(items) ||
-      items.map(({ by, title, url, id }) => (
-        <li key={`${id}`}>
-          <a href={url}>{title}</a> - {by}
-        </li>
-      ))}
+    {items.map(({ by, title, url, id }) => (
+      <li key={`${id}`}>
+        <a href={url}>{title}</a> - {by}
+      </li>
+    ))}
   </ul>
 );
-export const Stories = props => (
+export const Stories = ({ loadStories, clearStories, items }) => (
   <div>
-    <button onClick={props.loadStories}>Load Stories</button>
-    <button onClick={props.clearStories}>Clear Stories</button>
-    <StoryList {...props} />
+    <button onClick={loadStories}>Load Stories</button>
+    <button onClick={clearStories}>Clear Stories</button>
+    <StoryList items={items} />
   </div>
 );
 
 const mapState = state => state;
-const mapDispatch = dispatch => ({
-  loadStories: () => dispatch(loadStories()),
-  clearStories: () => dispatch(clearStories())
-});
 export default connect(
   mapState,
-  mapDispatch
+  actions
 )(Stories);
