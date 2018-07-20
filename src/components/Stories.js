@@ -3,22 +3,25 @@ import { connect } from "react-redux";
 
 import * as actions from "../actions";
 
-export const StoryList = ({ items }) => (
+export const StoryList = ({ stories }) => (
   <ul>
-    {items.map(({ by, title, url, id }) => (
+    {stories.map(({ by, title, url, id }) => (
       <li key={`${id}`}>
         <a href={url}>{title}</a> - {by}
       </li>
     ))}
   </ul>
 );
-export const Stories = ({ loadStories, clearStories, items }) => (
-  <div>
-    <button onClick={loadStories}>Load Stories</button>
-    <button onClick={clearStories}>Clear Stories</button>
-    <StoryList items={items} />
-  </div>
-);
+export const Stories = props => {
+  const { loadStories, stories } = props;
+  if (props.loading) return <p>Please wait...</p>;
+  return (
+    <div>
+      <button onClick={loadStories}>Load Stories</button>
+      <StoryList stories={stories} />
+    </div>
+  );
+};
 
 const mapState = state => state;
 export default connect(

@@ -1,5 +1,12 @@
-export const LOADSTORIES = "loadstories";
-export const CLEARSTORIES = "clearstories";
+export const LOADSTORIES = "LOADSTORIES";
+export const LOADSTORIESDONE = "LOADSTORIESDONE";
 
-export const loadStories = () => ({ type: LOADSTORIES });
-export const clearStories = () => ({ type: CLEARSTORIES });
+export const loadStories = (count = 5) => ({
+  type: LOADSTORIES,
+  payload: count
+});
+
+export const loadStoriesDone = stories => ({
+  type: LOADSTORIESDONE,
+  payload: stories
+});
